@@ -1,0 +1,89 @@
+{
+    "name": "vscode-app-localizer",
+    "displayName": "vscode-app-localizer",
+    "description": "Visual Studio Code Application Localizer",
+    "version": "0.0.1",
+    "publisher": "gsppvo",
+    "license": "SEE LICENSE IN LICENSE.md",
+    "homepage": "https://github.com/ppatotski/vscode-app-localizer/blob/master/README.md",
+    "icon": "logo.svg",
+    "engines": {
+        "vscode": "^1.10.0"
+    },
+    "contributors": [
+        {
+            "email": "gsppvo@gmail.com",
+            "name": "Petr Patotski"
+        }
+    ],
+    "bugs": {
+        "url": "https://github.com/ppatotski/vscode-app-localizer/issues",
+        "email": "gsppvo@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ppatotski/vscode-app-localizer.git"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "localization",
+        "localize",
+        "i18n",
+        "l10n",
+        "internationalization"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "galleryBanner": {
+        "color": "#d1dcf0",
+        "theme": "light"
+    },
+    "main": "./extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.applocalizer.settings",
+                "title": "applocalizer Settings"
+            }
+        ],
+        "jsonValidation": [
+            {
+                "fileMatch": "/.vscode/applocalizer.json",
+                "url": "./vscode-app-localizer-schema.json"
+            }
+        ]
+    },
+    "badges": [
+        {
+            "url": "http://vsmarketplacebadge.apphb.com/version/gsppvo.vscode-app-localizer.svg",
+            "href": "https://marketplace.visualstudio.com/items?itemName=gsppvo.vscode-app-localizer",
+            "description": "VSCode Extension Release"
+        },
+        {
+            "url": "https://img.shields.io/github/release/ppatotski/vscode-app-localizer.svg",
+            "href": "https://github.com/ppatotski/vscode-app-localizer/releases",
+            "description": "Github Release"
+        },
+        {
+            "url": "https://david-dm.org/ppatotski/vscode-app-localizer.svg",
+            "href": "https://david-dm.org/ppatotski/vscode-app-localizer",
+            "description": "Dependency Status"
+        }
+    ],
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "vscode": "^1.0.0",
+        "mocha": "^2.3.3",
+        "eslint": "^3.6.0",
+        "@types/node": "^6.0.40",
+        "@types/mocha": "^2.2.32"
+    },
+    "dependencies": {
+    }
+}
