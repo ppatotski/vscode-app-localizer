@@ -13,6 +13,7 @@ Visual Studio Code Application Localizer.
     - Longer sentence
     - Right-to-Left
     - Brackets wrapping
+* Create default settings
 * Coming soon: Locale validator
 
 [![Demo](demo.gif)](demo.gif)
