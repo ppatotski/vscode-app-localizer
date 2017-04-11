@@ -5,7 +5,7 @@
     "validator": {
       "type": "object",
       "description": "Coming soon"
-   },
+    },
     "pseudoLocale": {
       "type": "object",
       "description": "Pseudo localizer settings",
@@ -28,6 +28,6 @@
           "description": "Left-to-Right"
         }
       }
-   }
+    }
   }
 }

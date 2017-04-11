@@ -39,13 +39,31 @@ Visual Studio Code Application Localizer.
 ```json
 {
     "validator": {
-      "type": "object",
-      "description": "Validates locale files"
-   },
+        "type": "object",
+        "description": "Coming soon"
+    },
     "pseudoLocale": {
-      "type": "object",
-      "description": "Pseudo localizer settings"
-   }
+        "type": "object",
+        "description": "Pseudo localizer settings",
+        "properties": {
+        "expander": {
+            "type": "number",
+            "description": "Expand factor 0.3 = 30%",
+            "default": 0.3
+        },
+        "brackets": {
+            "type": "boolean",
+            "description": "Wrapping text in brackets"
+        },
+        "accents": {
+            "type": "boolean",
+            "description": "Convert letter to its accent version"
+        },
+        "rightToLeft": {
+            "type": "boolean",
+            "description": "Left-to-Right"
+        }
+    }
 }
 ```
 
