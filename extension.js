@@ -11,7 +11,7 @@ const exampleJson = `{
         "autoFix": false,
         "localizationFiles": "./locales/*.json"
     },
-	"pseudo": {
+	"pseudoLocale": {
         "expander": 0.3,
         "brackets": true,
         "accents": true,

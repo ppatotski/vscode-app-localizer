@@ -2,7 +2,7 @@
     "name": "vscode-app-localizer",
     "displayName": "vscode-app-localizer",
     "description": "Visual Studio Code Application Localizer",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "gsppvo",
     "license": "SEE LICENSE IN LICENSE.md",
     "homepage": "https://github.com/ppatotski/vscode-app-localizer/blob/master/README.md",
@@ -63,12 +63,14 @@
                 }
             ]
         },
-        "keybindings": [{
-            "command": "extension.applocalizer.pseudoReplace",
-            "key": "ctrl+l",
-            "mac": "cmd+l",
-            "when": "editorHasSelection"
-        }],
+        "keybindings": [
+            {
+                "command": "extension.applocalizer.pseudoReplace",
+                "key": "ctrl+l",
+                "mac": "cmd+l",
+                "when": "editorHasSelection"
+            }
+        ],
         "jsonValidation": [
             {
                 "fileMatch": "/.vscode/applocalizer.json",
