@@ -4,7 +4,6 @@ const mapping = require( './mapping.json' );
 const numbers = require( './numbers.json' );
 const fs = require('fs');
 
-const statusBarItems = {};
 const createNewMessage = 'Settings file had been created. Update wont take effect until restart vscode';
 const exampleJson = `{
     "validator": {
@@ -51,10 +50,10 @@ function activate(context) {
                 });         
             }   
         });
+        context.subscriptions.push(vsSettingsCommand);
 
         if(vscode.workspace.rootPath) {
             const settingsPath = `${vscode.workspace.rootPath}/.vscode/applocalizer.json`;
-            const channel = vscode.window.createOutputChannel('applocalizer');
         
             fs.stat(settingsPath, (err) => {
                 if(!err) {
@@ -81,8 +80,8 @@ function activate(context) {
                                             }
                                             if(settings.pseudoLocale.accents) {
                                                 let pseudo = '';
-                                                [...text].forEach(latter => {
-                                                    pseudo += mapping[latter];
+                                                [...text].forEach(letter => {
+                                                    pseudo += mapping[letter];
                                                 });
                                                 text = pseudo;
                                             }
@@ -111,8 +110,6 @@ function activate(context) {
             });
             
         }
-
-        context.subscriptions.push(vsSettingsCommand);
     } catch(err) {
         console.error(err);
     }
@@ -121,11 +118,6 @@ function activate(context) {
 exports.activate = activate;
 
 function deactivate() {
-    Object.keys(statusBarItems).forEach((key) => {
-        if(statusBarItems[key].process) {
-            kill(statusBarItems[key].process.pid);
-        }
-    });
 }
 
 exports.deactivate = deactivate;

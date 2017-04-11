@@ -1,4 +1,4 @@
 # Change Log
 
-## 0.0.1 (April 10, 2017)
-- MVP
+## 0.0.3 (April 11, 2017)
+- Features: Pseudo localizer

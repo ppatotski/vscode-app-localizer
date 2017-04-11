@@ -4,12 +4,18 @@ Visual Studio Code Application Localizer.
 
 ## Get Started
 
-
+[![Get Started](getstarted.gif)](getstarted.gif)
 
 ## Features
 
-* MVP
+* Pseudo localizer (char mapping is taken from [there](https://code.google.com/archive/p/pseudolocalization-tool/))
+    - Accents on letters
+    - Longer sentence
+    - Right-to-Left
+    - Brackets wrapping
+* Coming soon: Locale validator
 
+[![Demo](demo.gif)](demo.gif)
 
 ## Configuration
 
