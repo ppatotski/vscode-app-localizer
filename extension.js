@@ -1,20 +1,18 @@
 'use strict';
 const vscode = require('vscode');
-const childProcess = require( 'child_process' );
-const kill = require( 'tree-kill' );
+const mapping = require( './mapping.json' );
+const numbers = require( './numbers.json' );
 const fs = require('fs');
 
 const statusBarItems = {};
 const createNewMessage = 'Settings file had been created. Update wont take effect until restart vscode';
 const exampleJson = `{
-	"validator":
-    {
+    "validator": {
         "autoFix": false,
         "localizationFiles": "./locales/*.json"
     },
-	"pseudo":
-    {
-        "expander": 30,
+	"pseudo": {
+        "expander": 0.3,
         "brackets": true,
         "accents": true
     }
@@ -64,6 +62,46 @@ function activate(context) {
                             console.error(err);
                         } else {
                             const settings = JSON.parse(buffer);
+                            const vsPseudoReplaceCommand = vscode.commands.registerCommand('extension.applocalizer.pseudoReplace', () => {
+                                vscode.window.activeTextEditor.selection
+                                vscode.window.activeTextEditor.edit(edit => {
+                                    if(!vscode.window.activeTextEditor.selection.isEmpty) {
+                                        const localize = function localize(text) {
+                                            if(settings.pseudoLocale.expander) {
+                                                let charCount = text.length * settings.pseudoLocale.expander;
+                                                let wordIndex = 0;
+                                                let expansion = charCount;
+                                                while (expansion > 0) {
+                                                    const word = numbers.words[wordIndex % numbers.words.length];
+                                                    text += ` ${word}`;
+                                                    expansion -= word.length + 1;
+                                                    wordIndex += 1;
+                                                }
+                                            }
+                                            if(settings.pseudoLocale.accents) {
+                                                let pseudo = '';
+                                                [...text].forEach(latter => {
+                                                    pseudo += mapping[latter];
+                                                });
+                                                text = pseudo;
+                                            }
+                                            if(settings.pseudoLocale.rightToLeft) {
+                                                const RLO = '\u202e';
+                                                const PDF = '\u202c';
+                                                const RLM = '\u200F';
+                                                text = RLM + RLO + text + PDF + RLM;
+                                            }
+                                            if(settings.pseudoLocale.brackets) {
+                                                text = `[!!! ${text} !!!]`;
+                                            }
+                                            return text;
+                                        }
+                                        const text = vscode.window.activeTextEditor.document.getText(vscode.window.activeTextEditor.selection);
+                                        edit.replace(vscode.window.activeTextEditor.selection, localize(text));
+                                    }
+                                });
+                            });
+                            context.subscriptions.push(vsPseudoReplaceCommand);
                         }
                     });
                     

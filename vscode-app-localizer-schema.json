@@ -5,6 +5,10 @@
     "validator": {
       "type": "object",
       "description": "Validates locale files"
+   },
+    "pseudoLocale": {
+      "type": "object",
+      "description": "Pseudo localizer settings"
    }
   }
 }

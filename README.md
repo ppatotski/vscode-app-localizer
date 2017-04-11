@@ -8,7 +8,7 @@ Visual Studio Code Application Localizer.
 
 ## Features
 
-* Coming soon
+* MVP
 
 
 ## Configuration
@@ -16,13 +16,11 @@ Visual Studio Code Application Localizer.
 ### Config file example (`./.vscode/applocalizer.json`)
 ```json
 {
-	"validator":
-    {
+    "validator": {
         "autoFix": false,
         "localizationFiles": "./locales/*.json"
     },
-	"pseudo":
-    {
+    "pseudoLocale": {
         "expander": 30,
         "brackets": true,
         "accents": true
@@ -33,6 +31,14 @@ Visual Studio Code Application Localizer.
 ### Configuration file schema (documentation)
 ```json
 {
+    "validator": {
+      "type": "object",
+      "description": "Validates locale files"
+   },
+    "pseudoLocale": {
+      "type": "object",
+      "description": "Pseudo localizer settings"
+   }
 }
 ```
 

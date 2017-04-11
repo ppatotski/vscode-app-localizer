@@ -29,7 +29,7 @@
     ],
     "keywords": [
         "localization",
-        "localize",
+        "pseudo",
         "i18n",
         "l10n",
         "internationalization"
@@ -46,9 +46,29 @@
         "commands": [
             {
                 "command": "extension.applocalizer.settings",
-                "title": "applocalizer Settings"
+                "title": "Applocalizer Settings",
+                "icon": "logo.svg"
+            },
+            {
+                "command": "extension.applocalizer.pseudoReplace",
+                "title": "Pseudo Localize Selection"
             }
         ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "extension.applocalizer.pseudoReplace",
+                    "group": "1_modification",
+                    "when": "editorHasSelection"
+                }
+            ]
+        },
+        "keybindings": [{
+            "command": "extension.applocalizer.pseudoReplace",
+            "key": "ctrl+l",
+            "mac": "cmd+l",
+            "when": "editorHasSelection"
+        }],
         "jsonValidation": [
             {
                 "fileMatch": "/.vscode/applocalizer.json",
@@ -83,7 +103,5 @@
         "eslint": "^3.6.0",
         "@types/node": "^6.0.40",
         "@types/mocha": "^2.2.32"
-    },
-    "dependencies": {
     }
 }
