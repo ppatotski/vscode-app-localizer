@@ -23,16 +23,16 @@ Visual Studio Code Application Localizer.
 ### Config file example (`./.vscode/applocalizer.json`)
 ```json
 {
-    "validator": {
-        "autoFix": false,
-        "localizationFiles": "./locales/*.json"
-    },
-    "pseudoLocale": {
-        "expander": 0.3,
-        "brackets": true,
-        "accents": true,
-        "rightToLeft": false
-    }
+	"validator": {
+		"autoFix": false,
+		"localizationFiles": "./locales/*.json"
+	},
+	"pseudoLocale": {
+		"expander": 0.3,
+		"brackets": true,
+		"accents": true,
+		"rightToLeft": false
+	}
 }
 ```
 
@@ -47,22 +47,23 @@ Visual Studio Code Application Localizer.
         "type": "object",
         "description": "Pseudo localizer settings",
         "properties": {
-        "expander": {
-            "type": "number",
-            "description": "Expand factor 0.3 = 30%",
-            "default": 0.3
-        },
-        "brackets": {
-            "type": "boolean",
-            "description": "Wrapping text in brackets"
-        },
-        "accents": {
-            "type": "boolean",
-            "description": "Convert letter to its accent version"
-        },
-        "rightToLeft": {
-            "type": "boolean",
-            "description": "Left-to-Right"
+            "expander": {
+                "type": "number",
+                "description": "Expand factor 0.3 = 30%",
+                "default": 0.3
+            },
+            "brackets": {
+                "type": "boolean",
+                "description": "Wrapping text in brackets"
+            },
+            "accents": {
+                "type": "boolean",
+                "description": "Convert letter to its accent version"
+            },
+            "rightToLeft": {
+                "type": "boolean",
+                "description": "Left-to-Right"
+            }
         }
     }
 }
