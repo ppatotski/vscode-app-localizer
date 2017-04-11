@@ -5,7 +5,7 @@
     "version": "0.0.3",
     "publisher": "gsppvo",
     "license": "SEE LICENSE IN LICENSE.md",
-    "homepage": "https://github.com/ppatotski/vscode-app-localizer/blob/master/README.md",
+    "homepage": "https://github.com/ppatotski/vscode-app-localizer",
     "icon": "logo.svg",
     "engines": {
         "vscode": "^1.10.0"
@@ -46,12 +46,21 @@
         "commands": [
             {
                 "command": "extension.applocalizer.settings",
-                "title": "Applocalizer Settings",
-                "icon": "logo.svg"
+                "title": "Settings",
+                "category": "Applocalizer",
+                "icon": {
+                    "dark": "./logo.svg",
+                    "light": "./logo.svg"
+                }
             },
             {
                 "command": "extension.applocalizer.pseudoReplace",
-                "title": "Pseudo Localize Selection"
+                "title": "Pseudo Localize",
+                "category": "Applocalizer",
+                "icon": {
+                    "dark": "./logo.svg",
+                    "light": "./logo.svg"
+                }
             }
         ],
         "menus": {
