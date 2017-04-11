@@ -21,9 +21,10 @@ Visual Studio Code Application Localizer.
         "localizationFiles": "./locales/*.json"
     },
     "pseudoLocale": {
-        "expander": 30,
+        "expander": 0.3,
         "brackets": true,
-        "accents": true
+        "accents": true,
+        "rightToLeft": false
     }
 }
 ```

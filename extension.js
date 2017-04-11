@@ -14,7 +14,8 @@ const exampleJson = `{
 	"pseudo": {
         "expander": 0.3,
         "brackets": true,
-        "accents": true
+        "accents": true,
+        "rightToLeft": false
     }
 }`;
 
