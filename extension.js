@@ -7,8 +7,7 @@ const fs = require('fs');
 const createNewMessage = 'Settings file had been created. Update wont take effect until restart vscode';
 const exampleJson = `{
 	"validator": {
-		"autoFix": false,
-		"localizationFiles": "./locales/*.json"
+		"filePathMatch": "\\\\\\\\locales.json"
 	},
 	"pseudoLocale": {
 		"expander": 0.3,
@@ -63,7 +62,6 @@ function activate(context) {
 						} else {
 							const settings = JSON.parse(buffer);
 							const vsPseudoReplaceCommand = vscode.commands.registerCommand('extension.applocalizer.pseudoReplace', () => {
-								vscode.window.activeTextEditor.selection
 								vscode.window.activeTextEditor.edit(edit => {
 									if(!vscode.window.activeTextEditor.selection.isEmpty) {
 										const localize = function localize(text) {
@@ -102,6 +100,42 @@ function activate(context) {
 								});
 							});
 							context.subscriptions.push(vsPseudoReplaceCommand);
+
+							const collection = vscode.languages.createDiagnosticCollection('Applocalizer');
+							const validate = function validate(document) {
+								if(settings.validator && settings.validator.filePathMatch && document.fileName.match(settings.validator.filePathMatch)) {
+									const text = document.getText();
+									const localesData = JSON.parse(text);
+									const locales = Object.keys(localesData);
+									let diagnostics = [];
+									locales.forEach((key) => {
+										const localeLabels = Object.keys(localesData[key]);
+										localeLabels.forEach((label) => {
+											let missing = [];
+											locales.forEach((l) => {
+												if(!Object.keys(localesData[l]).some(key => key === label)) {
+													missing.push(l);
+												}
+											});
+											if(missing.length) {
+												const localeLocation = text.search(`"${key}"`);
+												const location = text.substring(localeLocation).search(`"${label}"`);
+												const position = vscode.window.activeTextEditor.document.positionAt(localeLocation + location);
+												const range = new vscode.Range(position, new vscode.Position(position.line, position.character + `"${label}"`.length));
+
+												diagnostics.push(new vscode.Diagnostic(range, `Label "${label}" is missing in "${missing.join()}" locale(s)`, vscode.DiagnosticSeverity.Error));
+											}
+										});
+									});
+
+									collection.set(document.uri, diagnostics);
+								}
+							}
+							vscode.window.onDidChangeActiveTextEditor((event) => validate(event.document));
+							vscode.workspace.onDidChangeTextDocument((event) => validate(event.document));
+							if(vscode.window.activeTextEditor) {
+								validate(vscode.window.activeTextEditor.document);
+							}
 						}
 					});
 

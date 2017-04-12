@@ -4,7 +4,14 @@
 	"properties": {
 		"validator": {
 			"type": "object",
-			"description": "Coming soon"
+			"description": "Validate locales (missing labels)",
+			"properties": {
+				"filePathMatch": {
+					"type": "string",
+					"description": "RegEx expression of locale files path",
+					"default": "\\\\locales.json"
+				}
+			}
 		},
 		"pseudoLocale": {
 			"type": "object",
