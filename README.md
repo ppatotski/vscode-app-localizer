@@ -13,8 +13,9 @@ Visual Studio Code Application Localizer.
     - Longer sentence
     - Right-to-Left
     - Brackets wrapping
+* Locale validator
+	- Check for missing labels
 * Create default settings
-* Coming soon: Locale validator
 
 [![Demo](demo.gif)](demo.gif)
 
@@ -23,48 +24,55 @@ Visual Studio Code Application Localizer.
 ### Config file example (`./.vscode/applocalizer.json`)
 ```json
 {
-    "validator": {
-        "autoFix": false,
-        "localizationFiles": "./locales/*.json"
-    },
-    "pseudoLocale": {
-        "expander": 0.3,
-        "brackets": true,
-        "accents": true,
-        "rightToLeft": false
-    }
+	"validator": {
+		"filePathMatch": "\\\\locales.json"
+	},
+	"pseudoLocale": {
+		"expander": 0.3,
+		"brackets": true,
+		"accents": true,
+		"rightToLeft": false
+	}
 }
 ```
 
 ### Configuration file schema (documentation)
 ```json
 {
-    "validator": {
-        "type": "object",
-        "description": "Coming soon"
-    },
-    "pseudoLocale": {
-        "type": "object",
-        "description": "Pseudo localizer settings",
-        "properties": {
-        "expander": {
-            "type": "number",
-            "description": "Expand factor 0.3 = 30%",
-            "default": 0.3
-        },
-        "brackets": {
-            "type": "boolean",
-            "description": "Wrapping text in brackets"
-        },
-        "accents": {
-            "type": "boolean",
-            "description": "Convert letter to its accent version"
-        },
-        "rightToLeft": {
-            "type": "boolean",
-            "description": "Left-to-Right"
-        }
-    }
+	"validator": {
+		"type": "object",
+		"description": "Validate locales (missing labels)",
+		"properties": {
+			"filePathMatch": {
+				"type": "string",
+				"description": "RegEx expression of locale files path",
+				"default": "\\\\locales.json"
+			}
+		}
+	},
+	"pseudoLocale": {
+		"type": "object",
+		"description": "Pseudo localizer settings",
+		"properties": {
+			"expander": {
+				"type": "number",
+				"description": "Expand factor 0.3 = 30%",
+				"default": 0.3
+			},
+			"brackets": {
+				"type": "boolean",
+				"description": "Wrapping text in brackets"
+			},
+			"accents": {
+				"type": "boolean",
+				"description": "Convert letter to its accent version"
+			},
+			"rightToLeft": {
+				"type": "boolean",
+				"description": "Left-to-Right"
+			}
+		}
+	}
 }
 ```
 
