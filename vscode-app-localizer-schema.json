@@ -6,10 +6,14 @@
 			"type": "object",
 			"description": "Validate locales (missing labels)",
 			"properties": {
-				"filePathMatch": {
+				"filePathPattern": {
 					"type": "string",
-					"description": "RegEx expression of locale files path",
-					"default": "\\\\locales.json"
+					"description": "Pattern of locale files path",
+					"default": "**/locales.json"
+				},
+				"filePathMatch": {
+					"type": "null",
+					"description": "'filePathMatch' is deprecated"
 				}
 			}
 		},

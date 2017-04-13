@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.1 (April 13, 2017)
+- Improvement: file path as a pattern (`filePathMatch` is deprecated)
+
 ## 0.1.0 (April 12, 2017)
 - Features: Locale validator
 
