@@ -25,7 +25,7 @@ Visual Studio Code Application Localizer.
 ```json
 {
 	"validator": {
-		"filePathMatch": "\\\\locales.json"
+		"filePathPattern": "**/locales.json"
 	},
 	"pseudoLocale": {
 		"expander": 0.3,
@@ -43,10 +43,10 @@ Visual Studio Code Application Localizer.
 		"type": "object",
 		"description": "Validate locales (missing labels)",
 		"properties": {
-			"filePathMatch": {
+			"filePathPattern": {
 				"type": "string",
 				"description": "RegEx expression of locale files path",
-				"default": "\\\\locales.json"
+				"default": "**/locales.json"
 			}
 		}
 	},
