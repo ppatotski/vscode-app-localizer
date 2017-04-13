@@ -45,7 +45,7 @@ Visual Studio Code Application Localizer.
 		"properties": {
 			"filePathPattern": {
 				"type": "string",
-				"description": "RegEx expression of locale files path",
+				"description": "Pattern of locale files path",
 				"default": "**/locales.json"
 			}
 		}
