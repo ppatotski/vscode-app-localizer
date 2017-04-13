@@ -7,7 +7,7 @@ const fs = require('fs');
 const createNewMessage = 'Settings file had been created. Update wont take effect until restart vscode';
 const exampleJson = `{
 	"validator": {
-		"filePathMatch": "\\\\\\\\locales.json"
+		"filePathPattern": "**/locales.json"
 	},
 	"pseudoLocale": {
 		"expander": 0.3,
@@ -103,7 +103,7 @@ function activate(context) {
 
 							const collection = vscode.languages.createDiagnosticCollection('Applocalizer');
 							const validate = function validate(document) {
-								if(settings.validator && settings.validator.filePathMatch && document.fileName.match(settings.validator.filePathMatch)) {
+								if(settings.validator && settings.validator.filePathPattern && vscode.languages.match({ pattern: settings.validator.filePathPattern }, document)) {
 									const text = document.getText();
 									const localesData = JSON.parse(text);
 									const locales = Object.keys(localesData);
@@ -127,7 +127,6 @@ function activate(context) {
 											}
 										});
 									});
-
 									collection.set(document.uri, diagnostics);
 								}
 							}
