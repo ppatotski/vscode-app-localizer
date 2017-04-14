@@ -4,16 +4,12 @@
 	"properties": {
 		"validator": {
 			"type": "object",
-			"description": "Validate locales (missing labels)",
+			"description": "Validate locales (checking for missing labels)",
 			"properties": {
 				"filePathPattern": {
 					"type": "string",
 					"description": "Pattern of locale files path",
 					"default": "**/locales.json"
-				},
-				"filePathMatch": {
-					"type": "null",
-					"description": "'filePathMatch' is deprecated"
 				}
 			}
 		},
@@ -28,7 +24,11 @@
 				},
 				"brackets": {
 					"type": "boolean",
-					"description": "Wrapping text in brackets"
+					"description": "Enclose in brackets"
+				},
+				"exclamations": {
+					"type": "boolean",
+					"description": "Enclose in exclamations"
 				},
 				"accents": {
 					"type": "boolean",

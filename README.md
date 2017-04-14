@@ -8,13 +8,14 @@ Visual Studio Code Application Localizer.
 
 ## Features
 
-* Pseudo localizer (char mapping is taken from [there](https://code.google.com/archive/p/pseudolocalization-tool/))
+* Pseudo localizer (char mapping/words is taken from [pseudolocalization-tool](https://code.google.com/archive/p/pseudolocalization-tool/))
     - Accents on letters
     - Longer sentence
     - Right-to-Left
-    - Brackets wrapping
+    - Enclose in exclamations
+    - Enclose in brackets
 * Locale validator
-	- Check for missing labels
+	- Check for missing labels (single json format file e.g. polymer)
 * Create default settings
 
 [![Demo](demo.gif)](demo.gif)
@@ -29,6 +30,7 @@ Visual Studio Code Application Localizer.
 	},
 	"pseudoLocale": {
 		"expander": 0.3,
+		"exclamations": true,
 		"brackets": true,
 		"accents": true,
 		"rightToLeft": false
@@ -41,7 +43,7 @@ Visual Studio Code Application Localizer.
 {
 	"validator": {
 		"type": "object",
-		"description": "Validate locales (missing labels)",
+		"description": "Validate locales (checking for missing labels)",
 		"properties": {
 			"filePathPattern": {
 				"type": "string",
@@ -61,7 +63,11 @@ Visual Studio Code Application Localizer.
 			},
 			"brackets": {
 				"type": "boolean",
-				"description": "Wrapping text in brackets"
+				"description": "Enclose in brackets"
+			},
+			"exclamations": {
+				"type": "boolean",
+				"description": "Enclose in exclamations"
 			},
 			"accents": {
 				"type": "boolean",
@@ -75,6 +81,10 @@ Visual Studio Code Application Localizer.
 	}
 }
 ```
+
+## Change Log
+
+[Change Log](CHANGELOG.md)
 
 ## License
 

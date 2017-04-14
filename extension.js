@@ -11,6 +11,7 @@ const exampleJson = `{
 	},
 	"pseudoLocale": {
 		"expander": 0.3,
+		"exclamations": true,
 		"brackets": true,
 		"accents": true,
 		"rightToLeft": false
@@ -66,7 +67,7 @@ function activate(context) {
 									if(!vscode.window.activeTextEditor.selection.isEmpty) {
 										const localize = function localize(text) {
 											if(settings.pseudoLocale.expander) {
-												let charCount = text.length * settings.pseudoLocale.expander;
+												let charCount = Math.round(text.length * settings.pseudoLocale.expander);
 												let wordIndex = 0;
 												let expansion = charCount;
 												while (expansion > 0) {
@@ -89,8 +90,11 @@ function activate(context) {
 												const RLM = '\u200F';
 												text = RLM + RLO + text + PDF + RLM;
 											}
+											if(settings.pseudoLocale.exclamations) {
+												text = `!!! ${text} !!!`;
+											}
 											if(settings.pseudoLocale.brackets) {
-												text = `[!!! ${text} !!!]`;
+												text = settings.pseudoLocale.exclamations ? `[${text}]` : `[ ${text} ]`;
 											}
 											return text;
 										}
