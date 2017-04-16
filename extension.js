@@ -7,6 +7,7 @@ const fs = require('fs');
 const createNewMessage = 'Settings file had been created. Update wont take effect until restart vscode';
 const exampleJson = `{
 	"validator": {
+		"multiFile": false,
 		"filePathPattern": "**/locales.json"
 	},
 	"pseudoLocale": {
@@ -105,39 +106,99 @@ function activate(context) {
 							});
 							context.subscriptions.push(vsPseudoReplaceCommand);
 
-							const collection = vscode.languages.createDiagnosticCollection('Applocalizer');
-							const validate = function validate(document) {
-								if(settings.validator && settings.validator.filePathPattern && vscode.languages.match({ pattern: settings.validator.filePathPattern }, document)) {
-									const text = document.getText();
-									const localesData = JSON.parse(text);
-									const locales = Object.keys(localesData);
-									let diagnostics = [];
-									locales.forEach((key) => {
-										const localeLabels = Object.keys(localesData[key]);
-										localeLabels.forEach((label) => {
-											let missing = [];
-											locales.forEach((l) => {
-												if(!Object.keys(localesData[l]).some(key => key === label)) {
-													missing.push(l);
+							if(settings.validator && settings.validator.multiFile) {
+								const collection = vscode.languages.createDiagnosticCollection('Applocalizer');
+								context.subscriptions.push(collection);
+								const validateMultiFile = function validateMultiFile(document) {
+									if(settings.validator && settings.validator.filePathPattern && vscode.languages.match({ pattern: settings.validator.filePathPattern }, document)) {
+										const text = document.getText();
+										const localesData = JSON.parse(text);
+										const key = Object.keys(localesData)[0];
+										// TODO: below code needs to be refactored
+										const validate = function validate() {
+											const locales = Object.keys(localesData);
+											let diagnostics = [];
+											const localeLabels = Object.keys(localesData[key]);
+											localeLabels.forEach((label) => {
+												let missing = [];
+												locales.forEach((l) => {
+													if(!Object.keys(localesData[l]).some(key => key === label)) {
+														missing.push(l);
+													}
+												});
+												if(missing.length) {
+													const localeLocation = text.search(`"${key}"`);
+													const location = text.substring(localeLocation).search(`"${label}"`);
+													const position = vscode.window.activeTextEditor.document.positionAt(localeLocation + location);
+													const range = new vscode.Range(position, new vscode.Position(position.line, position.character + `"${label}"`.length));
+
+													diagnostics.push(new vscode.Diagnostic(range, `Label "${label}" is missing in "${missing.join()}" locale(s)`, vscode.DiagnosticSeverity.Error));
 												}
 											});
-											if(missing.length) {
-												const localeLocation = text.search(`"${key}"`);
-												const location = text.substring(localeLocation).search(`"${label}"`);
-												const position = vscode.window.activeTextEditor.document.positionAt(localeLocation + location);
-												const range = new vscode.Range(position, new vscode.Position(position.line, position.character + `"${label}"`.length));
+											collection.set(document.uri, diagnostics);
 
-												diagnostics.push(new vscode.Diagnostic(range, `Label "${label}" is missing in "${missing.join()}" locale(s)`, vscode.DiagnosticSeverity.Error));
-											}
-										});
-									});
-									collection.set(document.uri, diagnostics);
+										}
+										const path = document.fileName.substring(0, document.fileName.lastIndexOf('\\'));
+										fs.readdir(path, (err, files) => {
+											let fileCount = files.length - 1;
+											files.forEach(file => {
+												if(`${path}\\${file}` !== document.fileName) {
+													fs.readFile(`${path}\\${file}`, (err, buffer) => {
+														fileCount -= 1;
+														const locale = JSON.parse(buffer);
+														const localeName = Object.keys(locale)[0];
+														localesData[localeName] = locale[localeName];
+														if(!fileCount) {
+															validate();
+														}
+													});
+												}
+											});
+										})
+
+									}
 								}
-							}
-							vscode.window.onDidChangeActiveTextEditor((event) => validate(event.document));
-							vscode.workspace.onDidChangeTextDocument((event) => validate(event.document));
-							if(vscode.window.activeTextEditor) {
-								validate(vscode.window.activeTextEditor.document);
+								vscode.window.onDidChangeActiveTextEditor((event) => validateMultiFile(event.document));
+								vscode.workspace.onDidChangeTextDocument((event) => validateMultiFile(event.document));
+								if(vscode.window.activeTextEditor) {
+									validateMultiFile(vscode.window.activeTextEditor.document);
+								}
+							} else {
+								const collection = vscode.languages.createDiagnosticCollection('Applocalizer');
+								context.subscriptions.push(collection);
+								const validate = function validate(document) {
+									if(settings.validator && settings.validator.filePathPattern && vscode.languages.match({ pattern: settings.validator.filePathPattern }, document)) {
+										const text = document.getText();
+										const localesData = JSON.parse(text);
+										const locales = Object.keys(localesData);
+										let diagnostics = [];
+										locales.forEach((key) => {
+											const localeLabels = Object.keys(localesData[key]);
+											localeLabels.forEach((label) => {
+												let missing = [];
+												locales.forEach((l) => {
+													if(!Object.keys(localesData[l]).some(key => key === label)) {
+														missing.push(l);
+													}
+												});
+												if(missing.length) {
+													const localeLocation = text.search(`"${key}"`);
+													const location = text.substring(localeLocation).search(`"${label}"`);
+													const position = vscode.window.activeTextEditor.document.positionAt(localeLocation + location);
+													const range = new vscode.Range(position, new vscode.Position(position.line, position.character + `"${label}"`.length));
+
+													diagnostics.push(new vscode.Diagnostic(range, `Label "${label}" is missing in "${missing.join()}" locale(s)`, vscode.DiagnosticSeverity.Error));
+												}
+											});
+										});
+										collection.set(document.uri, diagnostics);
+									}
+								}
+								vscode.window.onDidChangeActiveTextEditor((event) => validate(event.document));
+								vscode.workspace.onDidChangeTextDocument((event) => validate(event.document));
+								if(vscode.window.activeTextEditor) {
+									validate(vscode.window.activeTextEditor.document);
+								}
 							}
 						}
 					});
