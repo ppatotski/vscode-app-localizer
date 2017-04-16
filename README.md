@@ -1,4 +1,4 @@
-# Visual Studio Code Command bar
+# Visual Studio Code Application Localizer
 
 Visual Studio Code Application Localizer.
 
