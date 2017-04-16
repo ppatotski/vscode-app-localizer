@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.0 (April 16, 2017)
+- Improvement: Multi-file locale support
+
 ## 0.1.2 (April 14, 2017)
 - Improvement: `Enclose in exclamations` is configurable
 

@@ -1,22 +1,25 @@
-# Visual Studio Code Command bar
+# Visual Studio Code Application Localizer
 
 Visual Studio Code Application Localizer.
 
-## Get Started
-
-[![Get Started](getstarted.gif)](getstarted.gif)
-
 ## Features
 
+* Locale validator
+	- Check for missing labels
+	- Multi-file locale support (see [example](#multi-file-locale-example))
 * Pseudo localizer (char mapping/words is taken from [pseudolocalization-tool](https://code.google.com/archive/p/pseudolocalization-tool/))
     - Accents on letters
     - Longer sentence
     - Right-to-Left
     - Enclose in exclamations
     - Enclose in brackets
-* Locale validator
-	- Check for missing labels (single json format file e.g. polymer)
 * Create default settings
+
+## Get Started
+
+[![Get Started](getstarted.gif)](getstarted.gif)
+
+## Demo
 
 [![Demo](demo.gif)](demo.gif)
 
@@ -26,6 +29,7 @@ Visual Studio Code Application Localizer.
 ```json
 {
 	"validator": {
+		"multiFile": false,
 		"filePathPattern": "**/locales.json"
 	},
 	"pseudoLocale": {
@@ -45,6 +49,11 @@ Visual Studio Code Application Localizer.
 		"type": "object",
 		"description": "Validate locales (checking for missing labels)",
 		"properties": {
+			"multiFile": {
+				"type": "boolean",
+				"description": "Each locale is in separate file in the same folder.",
+				"default": "false"
+			},
 			"filePathPattern": {
 				"type": "string",
 				"description": "Pattern of locale files path",
@@ -78,6 +87,32 @@ Visual Studio Code Application Localizer.
 				"description": "Left-to-Right"
 			}
 		}
+	}
+}
+```
+
+## Multi-File locale example
+
+### file with en-us locale `/locales/en-us.locale.json`
+```json
+{
+	"en-us": {
+		"label3": "blah3",
+		"label1": "blah1",
+		"label2": "blah2",
+		"label4": "blah4"
+	}
+}
+```
+
+### file with fr locale `/locales/fr.locale.json`
+```json
+{
+	"fr": {
+		"label1": "blah1",
+		"label2": "blah2",
+		"label5": "blah3",
+		"label3": "blah4"
 	}
 }
 ```

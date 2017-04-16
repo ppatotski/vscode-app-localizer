@@ -6,6 +6,11 @@
 			"type": "object",
 			"description": "Validate locales (checking for missing labels)",
 			"properties": {
+				"multiFile": {
+					"type": "boolean",
+					"description": "Each locale is in separate file in the same folder.",
+					"default": "false"
+				},
 				"filePathPattern": {
 					"type": "string",
 					"description": "Pattern of locale files path",
