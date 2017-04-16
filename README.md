@@ -2,10 +2,6 @@
 
 Visual Studio Code Application Localizer.
 
-## Get Started
-
-[![Get Started](getstarted.gif)](getstarted.gif)
-
 ## Features
 
 * Locale validator
@@ -18,6 +14,12 @@ Visual Studio Code Application Localizer.
     - Enclose in exclamations
     - Enclose in brackets
 * Create default settings
+
+## Get Started
+
+[![Get Started](getstarted.gif)](getstarted.gif)
+
+## Demo
 
 [![Demo](demo.gif)](demo.gif)
 
@@ -88,6 +90,7 @@ Visual Studio Code Application Localizer.
 	}
 }
 ```
+
 ## Multi-File locale example
 
 ### file with en-us locale `/locales/en-us.locale.json`
