@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.1.2 (April 14, 2017)
+- Improvement: `Enclose in exclamations` is configurable
+
 ## 0.1.1 (April 13, 2017)
 - Improvement: file path as a pattern (`filePathMatch` is deprecated)
 
