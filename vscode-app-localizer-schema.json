@@ -15,6 +15,15 @@
 					"type": "string",
 					"description": "Pattern of locale files path",
 					"default": "**/locales.json"
+				},
+				"fileStructure": {
+					"type": "string",
+					"description": "Structure of locale file content",
+					"default": "polymer",
+					"enum": [
+						"polymer",
+						"angular.flat"
+					]
 				}
 			}
 		},

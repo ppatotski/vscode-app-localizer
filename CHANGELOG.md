@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.1 (April 17, 2017)
+- Improvement: Angular flat file structure support
+
 ## 0.2.0 (April 16, 2017)
 - Improvement: Multi-file locale support
 

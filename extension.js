@@ -8,7 +8,8 @@ const createNewMessage = 'Settings file had been created. Update wont take effec
 const exampleJson = `{
 	"validator": {
 		"multiFile": false,
-		"filePathPattern": "**/locales.json"
+		"filePathPattern": "**/locales.json",
+		"fileStructure": "polymer"
 	},
 	"pseudoLocale": {
 		"expander": 0.3,
@@ -111,23 +112,26 @@ function activate(context) {
 								context.subscriptions.push(collection);
 								const validateMultiFile = function validateMultiFile(document) {
 									if(settings.validator && settings.validator.filePathPattern && vscode.languages.match({ pattern: settings.validator.filePathPattern }, document)) {
+										// TODO: below code needs to be refactored
 										const text = document.getText();
 										const localesData = JSON.parse(text);
-										const key = Object.keys(localesData)[0];
-										// TODO: below code needs to be refactored
+										const otherLocales = {};
+										const fileName = document.fileName.substring(document.fileName.lastIndexOf('\\'));
+										const noLocaleKey = settings.validator.fileStructure === 'angular.flat';
+										const key = noLocaleKey? fileName : Object.keys(localesData)[0];
 										const validate = function validate() {
-											const locales = Object.keys(localesData);
+											const locales = Object.keys(otherLocales);
 											let diagnostics = [];
-											const localeLabels = Object.keys(localesData[key]);
+											const localeLabels = Object.keys(noLocaleKey ? localesData : localesData[key]);
 											localeLabels.forEach((label) => {
 												let missing = [];
 												locales.forEach((l) => {
-													if(!Object.keys(localesData[l]).some(key => key === label)) {
+													if(!Object.keys(otherLocales[l]).some(key => key === label)) {
 														missing.push(l);
 													}
 												});
 												if(missing.length) {
-													const localeLocation = text.search(`"${key}"`);
+													const localeLocation = noLocaleKey? 0 : text.search(`"${key}"`);
 													const location = text.substring(localeLocation).search(`"${label}"`);
 													const position = vscode.window.activeTextEditor.document.positionAt(localeLocation + location);
 													const range = new vscode.Range(position, new vscode.Position(position.line, position.character + `"${label}"`.length));
@@ -146,8 +150,8 @@ function activate(context) {
 													fs.readFile(`${path}\\${file}`, (err, buffer) => {
 														fileCount -= 1;
 														const locale = JSON.parse(buffer);
-														const localeName = Object.keys(locale)[0];
-														localesData[localeName] = locale[localeName];
+														const localeName = noLocaleKey? file : Object.keys(locale)[0];
+														otherLocales[localeName] = noLocaleKey? locale : locale[localeName];
 														if(!fileCount) {
 															validate();
 														}

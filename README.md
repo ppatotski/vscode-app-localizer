@@ -6,7 +6,9 @@ Visual Studio Code Application Localizer.
 
 * Locale validator
 	- Check for missing labels
-	- Multi-file locale support (see [example](#multi-file-locale-example))
+	- Multi-file locale support (see [example](#multi-file-locale-example) below)
+		* Polymer file structure
+		* Angular flat file structure
 * Pseudo localizer (char mapping/words is taken from [pseudolocalization-tool](https://code.google.com/archive/p/pseudolocalization-tool/))
     - Accents on letters
     - Longer sentence
@@ -30,7 +32,8 @@ Visual Studio Code Application Localizer.
 {
 	"validator": {
 		"multiFile": false,
-		"filePathPattern": "**/locales.json"
+		"filePathPattern": "**/locales.json",
+		"fileStructure": "polymer"
 	},
 	"pseudoLocale": {
 		"expander": 0.3,
@@ -58,6 +61,15 @@ Visual Studio Code Application Localizer.
 				"type": "string",
 				"description": "Pattern of locale files path",
 				"default": "**/locales.json"
+			},
+			"fileStructure": {
+				"type": "string",
+				"description": "Structure of locale file content",
+				"default": "polymer",
+				"enum": [
+					"polymer",
+					"angular.flat"
+				]
 			}
 		}
 	},
@@ -93,7 +105,7 @@ Visual Studio Code Application Localizer.
 
 ## Multi-File locale example
 
-### file with en-us locale `/locales/en-us.locale.json`
+### file with en-us locale `/locales/en-us.locale.json` (polymer file structure)
 ```json
 {
 	"en-us": {
@@ -105,15 +117,13 @@ Visual Studio Code Application Localizer.
 }
 ```
 
-### file with fr locale `/locales/fr.locale.json`
+### file with fr locale `/locales/fr.locale.json` (angular flat file structure)
 ```json
 {
-	"fr": {
-		"label1": "blah1",
-		"label2": "blah2",
-		"label5": "blah3",
-		"label3": "blah4"
-	}
+	"label1": "blah1",
+	"label2": "blah2",
+	"label5": "blah3",
+	"label3": "blah4"
 }
 ```
 
