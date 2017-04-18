@@ -109,7 +109,7 @@ Visual Studio Code Application Localizer.
 ```json
 {
 	"en-us": {
-		"label3": "blah3",
+		"label3": "blah3 {token}",
 		"label1": "blah1",
 		"label2": "blah2",
 		"label4": "blah4"
@@ -120,7 +120,7 @@ Visual Studio Code Application Localizer.
 ### file with fr locale `/locales/fr.locale.json` (angular flat file structure)
 ```json
 {
-	"label1": "blah1",
+	"label1": "blah1 {{token}}",
 	"label2": "blah2",
 	"label5": "blah3",
 	"label3": "blah4"

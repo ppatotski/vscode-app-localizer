@@ -80,9 +80,29 @@ function activate(context) {
 												}
 											}
 											if(settings.pseudoLocale.accents) {
+												let ignoreMode = false;
+												let preIgnoreMode = false;
 												let pseudo = '';
+
 												[...text].forEach(letter => {
-													pseudo += mapping[letter];
+													if(letter === '{') {
+														if(preIgnoreMode) {
+															ignoreMode = true;
+															pseudo = `${pseudo.substring(0, pseudo.length - 1)}{`;
+														}
+														preIgnoreMode = true;
+													}
+													if(preIgnoreMode || ignoreMode) {
+														pseudo += letter;
+													} else {
+														pseudo += mapping[letter];
+													}
+													if(letter === '}') {
+														if(!preIgnoreMode) {
+															ignoreMode = false;
+														}
+														preIgnoreMode = false;
+													}
 												});
 												text = pseudo;
 											}
