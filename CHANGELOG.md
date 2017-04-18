@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.2 (April 17, 2017)
+- Improvement: Locale string token support
+
 ## 0.2.1 (April 17, 2017)
 - Improvement: Angular flat file structure support
 
