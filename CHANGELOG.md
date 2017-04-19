@@ -1,6 +1,9 @@
 # Change Log
 
-## 0.2.2 (April 17, 2017)
+## 0.2.3 (April 19, 2017)
+- Improvement: Externalizing logic into npm package
+
+## 0.2.2 (April 18, 2017)
 - Improvement: Locale string token support
 
 ## 0.2.1 (April 17, 2017)

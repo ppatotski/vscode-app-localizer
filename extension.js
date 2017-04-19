@@ -1,7 +1,6 @@
 'use strict';
 const vscode = require('vscode');
-const mapping = require( './mapping.json' );
-const numbers = require( './numbers.json' );
+const localizer = require( 'app-localizer' );
 const fs = require('fs');
 
 const createNewMessage = 'Settings file had been created. Update wont take effect until restart vscode';
@@ -67,68 +66,15 @@ function activate(context) {
 							const vsPseudoReplaceCommand = vscode.commands.registerCommand('extension.applocalizer.pseudoReplace', () => {
 								vscode.window.activeTextEditor.edit(edit => {
 									if(!vscode.window.activeTextEditor.selection.isEmpty) {
-										const localize = function localize(text) {
-											if(settings.pseudoLocale.expander) {
-												let charCount = Math.round(text.length * settings.pseudoLocale.expander);
-												let wordIndex = 0;
-												let expansion = charCount;
-												while (expansion > 0) {
-													const word = numbers.words[wordIndex % numbers.words.length];
-													text += ` ${word}`;
-													expansion -= word.length + 1;
-													wordIndex += 1;
-												}
-											}
-											if(settings.pseudoLocale.accents) {
-												let ignoreMode = false;
-												let preIgnoreMode = false;
-												let pseudo = '';
-
-												[...text].forEach(letter => {
-													if(letter === '{') {
-														if(preIgnoreMode) {
-															ignoreMode = true;
-															pseudo = `${pseudo.substring(0, pseudo.length - 1)}{`;
-														}
-														preIgnoreMode = true;
-													}
-													if(preIgnoreMode || ignoreMode) {
-														pseudo += letter;
-													} else {
-														pseudo += mapping[letter];
-													}
-													if(letter === '}') {
-														if(!preIgnoreMode) {
-															ignoreMode = false;
-														}
-														preIgnoreMode = false;
-													}
-												});
-												text = pseudo;
-											}
-											if(settings.pseudoLocale.rightToLeft) {
-												const RLO = '\u202e';
-												const PDF = '\u202c';
-												const RLM = '\u200F';
-												text = RLM + RLO + text + PDF + RLM;
-											}
-											if(settings.pseudoLocale.exclamations) {
-												text = `!!! ${text} !!!`;
-											}
-											if(settings.pseudoLocale.brackets) {
-												text = settings.pseudoLocale.exclamations ? `[${text}]` : `[ ${text} ]`;
-											}
-											return text;
-										}
 										const text = vscode.window.activeTextEditor.document.getText(vscode.window.activeTextEditor.selection);
-										edit.replace(vscode.window.activeTextEditor.selection, localize(text));
+										edit.replace(vscode.window.activeTextEditor.selection, localizer.toPseudoText(text, settings.pseudoLocale));
 									}
 								});
 							});
 							context.subscriptions.push(vsPseudoReplaceCommand);
 
 							if(settings.validator && settings.validator.multiFile) {
-								const collection = vscode.languages.createDiagnosticCollection('Applocalizer');
+								const collection = vscode.languages.createDiagnosticCollection('app-localizer');
 								context.subscriptions.push(collection);
 								const validateMultiFile = function validateMultiFile(document) {
 									if(settings.validator && settings.validator.filePathPattern && vscode.languages.match({ pattern: settings.validator.filePathPattern }, document)) {
@@ -188,7 +134,7 @@ function activate(context) {
 									validateMultiFile(vscode.window.activeTextEditor.document);
 								}
 							} else {
-								const collection = vscode.languages.createDiagnosticCollection('Applocalizer');
+								const collection = vscode.languages.createDiagnosticCollection('app-localizer');
 								context.subscriptions.push(collection);
 								const validate = function validate(document) {
 									if(settings.validator && settings.validator.filePathPattern && vscode.languages.match({ pattern: settings.validator.filePathPattern }, document)) {
