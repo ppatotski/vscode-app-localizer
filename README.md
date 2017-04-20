@@ -12,6 +12,7 @@ Visual Studio Code Application Localizer.
 * Pseudo localizer (char mapping/words is taken from [pseudolocalization-tool](https://code.google.com/archive/p/pseudolocalization-tool/))
     - Accents on letters
     - Longer sentence
+    - Longer word
     - Right-to-Left
     - Enclose in exclamations
     - Enclose in brackets
@@ -40,7 +41,8 @@ Visual Studio Code Application Localizer.
 		"exclamations": true,
 		"brackets": true,
 		"accents": true,
-		"rightToLeft": false
+		"rightToLeft": false,
+		"wordexpander": 1
 	}
 }
 ```
@@ -81,6 +83,11 @@ Visual Studio Code Application Localizer.
 				"type": "number",
 				"description": "Expand factor 0.3 = 30%",
 				"default": 0.3
+			},
+			"wordexpander": {
+				"type": "number",
+				"description": "Expand factor 3 = 300% (does not support < 100% yet)",
+				"default": 1
 			},
 			"brackets": {
 				"type": "boolean",
