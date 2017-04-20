@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.4 (April 20, 2017)
+- Improvement: Pseudo locale wordexpander option support
+
 ## 0.2.3 (April 19, 2017)
 - Improvement: Externalizing logic into npm package
 
