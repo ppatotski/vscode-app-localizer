@@ -12,7 +12,7 @@ const exampleJson = `{
 	},
 	"pseudoLocale": {
 		"expander": 0.3,
-		"wordexpander": 0,
+		"wordexpander": 0.5,
 		"exclamations": true,
 		"brackets": true,
 		"accents": true,

@@ -38,8 +38,8 @@
 				},
 				"wordexpander": {
 					"type": "number",
-					"description": "Expand factor 3 = 300% (does not support < 100% yet)",
-					"default": 1
+					"description": "Expand factor 0.5 = 50%",
+					"default": 0.5
 				},
 				"brackets": {
 					"type": "boolean",

@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.5 (April 21, 2017)
+- Improvement: Pseudo locale algorithm improvement
+
 ## 0.2.4 (April 20, 2017)
 - Improvement: Pseudo locale wordexpander option support
 
