@@ -42,7 +42,7 @@ Visual Studio Code Application Localizer.
 		"brackets": true,
 		"accents": true,
 		"rightToLeft": false,
-		"wordexpander": 1
+		"wordexpander": 0.5
 	}
 }
 ```
@@ -86,7 +86,7 @@ Visual Studio Code Application Localizer.
 			},
 			"wordexpander": {
 				"type": "number",
-				"description": "Expand factor 3 = 300% (does not support < 100% yet)",
+				"description": "Expand factor 0.5 = 50%",
 				"default": 1
 			},
 			"brackets": {
