@@ -11,6 +11,10 @@
         },
         "sourceType": "module"
     },
+	"globals": {
+		"suite": false,
+		"test": false
+	},
     "rules": {
 		"indent": [ "warn", "tab", { "SwitchCase": 1, "MemberExpression": 1 } ],
         "no-const-assign": "warn",

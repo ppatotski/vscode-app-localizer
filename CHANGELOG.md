@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.6 (April 24, 2017)
+- Improvement: Externalizing validation logic into npm package
+
 ## 0.2.5 (April 21, 2017)
 - Improvement: Pseudo locale algorithm improvement
 

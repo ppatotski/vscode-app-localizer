@@ -109,6 +109,25 @@ Visual Studio Code Application Localizer.
 	}
 }
 ```
+## Single-File locale example
+
+### file with locales `/locales/locale.json`
+```json
+{
+	"en-us": {
+		"label3": "blah3 {token}",
+		"label1": "blah1",
+		"label2": "blah2",
+		"label4": "blah4"
+	},
+	"de-de": {
+		"label3": "blah3 {token}",
+		"label1": "blah1",
+		"label2": "blah2",
+		"label4": "blah4"
+	}
+}
+```
 
 ## Multi-File locale example
 
