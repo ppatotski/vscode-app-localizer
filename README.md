@@ -2,6 +2,10 @@
 
 Visual Studio Code Application Localizer.
 
+> Utilizes [app-localizer npm package](https://www.npmjs.com/package/app-localizer)
+>
+> [![NPM version](https://img.shields.io/npm/v/app-localizer.svg)](https://www.npmjs.com/package/app-localizer)
+
 ## Features
 
 * Locale validator
@@ -9,7 +13,7 @@ Visual Studio Code Application Localizer.
 	- Multi-file locale support (see [example](#multi-file-locale-example) below)
 		* Polymer file structure
 		* Angular flat file structure
-* Pseudo localizer (char mapping/words is taken from [pseudolocalization-tool](https://code.google.com/archive/p/pseudolocalization-tool/))
+* Pseudo localizer
     - Accents on letters
     - Longer sentence
     - Longer word

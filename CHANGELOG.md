@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.2.7 (April 25, 2017)
+- Improvement: Updated improved version of app-localizer npm package
+
 ## 0.2.6 (April 24, 2017)
 - Improvement: Externalizing validation logic into npm package
 
