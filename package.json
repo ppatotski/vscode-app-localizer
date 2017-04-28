@@ -2,7 +2,7 @@
     "name": "vscode-app-localizer",
     "displayName": "vscode-app-localizer",
     "description": "Visual Studio Code Application Localizer",
-    "version": "0.2.9",
+    "version": "0.3.0",
     "publisher": "gsppvo",
     "license": "SEE LICENSE IN LICENSE.md",
     "homepage": "https://github.com/ppatotski/vscode-app-localizer",
