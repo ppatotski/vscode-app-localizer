@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const localizer = require( 'app-localizer' );
 const fs = require('fs');
+const path = require('path');
 
 const createNewMessage = 'Settings file had been created. Update wont take effect until restart vscode';
 const exampleJson = `{
@@ -21,40 +22,36 @@ const exampleJson = `{
 
 function activate(context) {
 	try {
-		const vsSettingsCommand = vscode.commands.registerCommand('extension.applocalizer.settings', () => {
-			const settingsDir = `${vscode.workspace.rootPath}\\.vscode`;
-			const settingsPath = `${settingsDir}\\applocalizer.json`;
+		if(vscode.workspace.rootPath) {
+			const settingsPath = path.join(vscode.workspace.rootPath, '.vscode', 'applocalizer.json');
+			const vsSettingsCommand = vscode.commands.registerCommand('extension.applocalizer.settings', () => {
+				if(vscode.workspace.rootPath) {
+					fs.stat(settingsPath, (err) => {
+						if(!err) {
+							vscode.workspace.openTextDocument(settingsPath).then(doc => {
+								vscode.window.showTextDocument(doc);
+							});
+						} else {
+							const options = ['Create New', 'Cancel'];
 
-			if(vscode.workspace.rootPath) {
-				fs.stat(settingsPath, (err) => {
-					if(!err) {
-						vscode.workspace.openTextDocument(settingsPath).then(doc => {
-							vscode.window.showTextDocument(doc);
-						});
-					} else {
-						const options = ['Create New', 'Cancel'];
-
-						vscode.window.showQuickPick(options)
-							.then((option) => {
-								if(option === options[0]) {
-									vscode.workspace.openTextDocument(vscode.Uri.parse(`untitled:${settingsPath}`)).then(doc => {
-										vscode.window.showTextDocument(doc).then((editor) => {
-											editor.edit(edit => {
-												edit.insert(new vscode.Position(0, 0), exampleJson);
-												vscode.window.showInformationMessage(createNewMessage);
+							vscode.window.showQuickPick(options)
+								.then((option) => {
+									if(option === options[0]) {
+										vscode.workspace.openTextDocument(vscode.Uri.parse(`untitled:${settingsPath}`)).then(doc => {
+											vscode.window.showTextDocument(doc).then((editor) => {
+												editor.edit(edit => {
+													edit.insert(new vscode.Position(0, 0), exampleJson);
+													vscode.window.showInformationMessage(createNewMessage);
+												});
 											});
 										});
-									});
-								}
-							});
-					}
-				});
-			}
-		});
-		context.subscriptions.push(vsSettingsCommand);
-
-		if(vscode.workspace.rootPath) {
-			const settingsPath = `${vscode.workspace.rootPath}/.vscode/applocalizer.json`;
+									}
+								});
+						}
+					});
+				}
+			});
+			context.subscriptions.push(vsSettingsCommand);
 
 			fs.stat(settingsPath, (err) => {
 				if(!err) {
@@ -96,8 +93,8 @@ function activate(context) {
 									const text = document.getText();
 									let result = undefined;
 									if(settings.validator.multiFile) {
-										const path = document.fileName.substring(0, document.fileName.lastIndexOf('\\'));
-										localizer.validateLocales(path, settings.validator, JSON.parse(text), (result) => processValidationResult(result, text, document));
+										const folder = path.dirname(document.fileName);
+										localizer.validateLocales(folder, settings.validator, JSON.parse(text), (result) => processValidationResult(result, text, document));
 									} else {
 										result = localizer.validateLocalesContent(JSON.parse(text));
 										processValidationResult(result, text, document);
@@ -113,9 +110,7 @@ function activate(context) {
 					});
 
 				}
-
 			});
-
 		}
 	} catch(err) {
 		console.error(err);
