@@ -22,39 +22,39 @@ const exampleJson = `{
 
 function activate(context) {
 	try {
-		if(vscode.workspace.rootPath) {
+		if(vscode.workspace && vscode.workspace.rootPath) {
 			const settingsPath = path.join(vscode.workspace.rootPath, '.vscode', 'applocalizer.json');
 			const vsSettingsCommand = vscode.commands.registerCommand('extension.applocalizer.settings', () => {
-				if(vscode.workspace.rootPath) {
-					fs.stat(settingsPath, (err) => {
-						if(!err) {
-							vscode.workspace.openTextDocument(settingsPath).then(doc => {
-								vscode.window.showTextDocument(doc);
-							});
-						} else {
-							const options = ['Create New', 'Cancel'];
+				fs.stat(settingsPath, (err) => {
+					if(!err) {
+						vscode.workspace.openTextDocument(settingsPath).then((doc) => {
+							vscode.window.showTextDocument(doc);
+						});
+					} else {
+						const options = ['Create New', 'Cancel'];
 
-							vscode.window.showQuickPick(options)
-								.then((option) => {
-									if(option === options[0]) {
-										vscode.workspace.openTextDocument(vscode.Uri.parse(`untitled:${settingsPath}`)).then(doc => {
-											vscode.window.showTextDocument(doc).then((editor) => {
-												editor.edit(edit => {
-													edit.insert(new vscode.Position(0, 0), exampleJson);
-													vscode.window.showInformationMessage(createNewMessage);
-												});
+						vscode.window.showQuickPick(options)
+							.then((option) => {
+								if(option === options[0]) {
+									vscode.workspace.openTextDocument(vscode.Uri.parse(`untitled:${settingsPath}`)).then((doc) => {
+										vscode.window.showTextDocument(doc).then((editor) => {
+											editor.edit((edit) => {
+												edit.insert(new vscode.Position(0, 0), exampleJson);
+												vscode.window.showInformationMessage(createNewMessage);
 											});
 										});
-									}
-								});
-						}
-					});
-				}
+									});
+								}
+							});
+					}
+				});
 			});
 			context.subscriptions.push(vsSettingsCommand);
 
 			fs.stat(settingsPath, (err) => {
-				if(!err) {
+				if(err) {
+					console.error(err);
+				} else {
 					fs.readFile(settingsPath, (err, buffer) => {
 						if(err) {
 							console.error(err);
