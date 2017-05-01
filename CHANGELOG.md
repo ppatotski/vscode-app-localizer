@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.3.1 (May 1, 2017)
+- Improvement: Apply changes in `applocalizer.json` immediately
+
 ## 0.2.7 (April 25, 2017)
 - Improvement: Updated improved version of app-localizer npm package
 

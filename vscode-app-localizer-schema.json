@@ -5,6 +5,7 @@
 		"validator": {
 			"type": "object",
 			"description": "Validate locales (checking for missing labels)",
+			"required": [ "filePathPattern" ],
 			"properties": {
 				"multiFile": {
 					"type": "boolean",

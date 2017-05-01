@@ -20,7 +20,8 @@ Visual Studio Code Application Localizer.
     - Right-to-Left
     - Enclose in exclamations
     - Enclose in brackets
-* Create default settings
+* Create default settings file (`Ctrl+Shift+P` or `Cmd+Shift+P` type `Applocalizer: Settings`)
+	- Apply settings immediately after saving changes in `./.vscode/applocalizer.json` file
 
 ## Get Started
 
