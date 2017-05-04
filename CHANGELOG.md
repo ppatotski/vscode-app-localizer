@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.3.2 (May 4, 2017)
+- Bug: fixed several token handling issues for pseudo generator
+
 ## 0.3.1 (May 1, 2017)
 - Improvement: Apply changes in `applocalizer.json` immediately
 
