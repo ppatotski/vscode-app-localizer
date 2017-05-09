@@ -2,9 +2,9 @@
 
 Visual Studio Code Application Localizer.
 
-> Utilizes [app-localizer npm package](https://www.npmjs.com/package/app-localizer)
+> Utilizes [app-localizer](https://github.com/ppatotski/vscode-app-localizer)
 >
-> [![NPM version](https://img.shields.io/npm/v/app-localizer.svg)](https://www.npmjs.com/package/app-localizer)
+> [![NPM Package](https://img.shields.io/npm/v/app-localizer.svg)](https://www.npmjs.com/package/app-localizer)
 
 ## Features
 
@@ -20,6 +20,7 @@ Visual Studio Code Application Localizer.
     - Right-to-Left
     - Enclose in exclamations
     - Enclose in brackets
+	- Support [ICU Message syntax](https://formatjs.io/guides/message-syntax/)
 * Create default settings file (`Ctrl+Shift+P` or `Cmd+Shift+P` type `Applocalizer: Settings`)
 	- Apply settings immediately after saving changes in `./.vscode/applocalizer.json` file
 

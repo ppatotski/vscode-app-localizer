@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.3.4 (May 9, 2017)
+- Improvement: Support ICU Message syntax
+
+## 0.3.3 (May 5, 2017)
+- Issue: Display `Applocalizer can only be enabled if VS Code is opened on a workspace folder` command message
+
 ## 0.3.2 (May 4, 2017)
 - Bug: fixed several token handling issues for pseudo generator
 
