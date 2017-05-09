@@ -2,7 +2,7 @@
 
 Visual Studio Code Application Localizer.
 
-> Utilizes [app-localizer](https://github.com/ppatotski/vscode-app-localizer)
+> Utilizes [app-localizer](https://github.com/ppatotski/app-localizer)
 >
 > [![NPM Package](https://img.shields.io/npm/v/app-localizer.svg)](https://www.npmjs.com/package/app-localizer)
 
