@@ -3,6 +3,7 @@ const localizer = require( 'app-localizer' );
 const fs = require('fs');
 const path = require('path');
 
+const workspaceOnlyMessage = 'Applocalizer can only be enabled if VS Code is opened on a workspace folder';
 const exampleJson = `{
 	"validator": {
 		"multiFile": false,
@@ -21,9 +22,12 @@ const exampleJson = `{
 
 function activate(context) {
 	try {
-		if(vscode.workspace && vscode.workspace.rootPath) {
-			const settingsPath = path.join(vscode.workspace.rootPath, '.vscode', 'applocalizer.json');
-			const vsSettingsCommand = vscode.commands.registerCommand('extension.applocalizer.settings', () => {
+		let settingsPath = '';
+		let settings = undefined;
+		const vsSettingsCommand = vscode.commands.registerCommand('extension.applocalizer.settings', () => {
+			if(!settingsPath) {
+				vscode.window.showErrorMessage(workspaceOnlyMessage);
+			} else {
 				fs.stat(settingsPath, (err) => {
 					if(!err) {
 						vscode.workspace.openTextDocument(settingsPath).then((doc) => {
@@ -46,18 +50,24 @@ function activate(context) {
 							});
 					}
 				});
-			});
-			context.subscriptions.push(vsSettingsCommand);
-			let settings = undefined;
-			const vsPseudoReplaceCommand = vscode.commands.registerCommand('extension.applocalizer.pseudoReplace', () => {
+			}
+		});
+		context.subscriptions.push(vsSettingsCommand);
+		const vsPseudoReplaceCommand = vscode.commands.registerCommand('extension.applocalizer.pseudoReplace', () => {
+			if(!settingsPath) {
+				vscode.window.showErrorMessage(workspaceOnlyMessage);
+			} else {
 				vscode.window.activeTextEditor.edit(edit => {
 					if(!vscode.window.activeTextEditor.selection.isEmpty && settings && settings.pseudoLocale) {
 						const text = vscode.window.activeTextEditor.document.getText(vscode.window.activeTextEditor.selection);
 						edit.replace(vscode.window.activeTextEditor.selection, localizer.toPseudoText(text, settings.pseudoLocale));
 					}
 				});
-			});
-			context.subscriptions.push(vsPseudoReplaceCommand);
+			}
+		});
+		context.subscriptions.push(vsPseudoReplaceCommand);
+		if(vscode.workspace && vscode.workspace.rootPath) {
+			settingsPath = path.join(vscode.workspace.rootPath, '.vscode', 'applocalizer.json');
 
 			const collection = vscode.languages.createDiagnosticCollection('app-localizer');
 			context.subscriptions.push(collection);
