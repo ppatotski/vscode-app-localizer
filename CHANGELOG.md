@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.3.5 (May 11, 2017)
+- Issue: generate unnecessary `null` in `{pctBlack, number, null}` for pseudo text.
+
 ## 0.3.4 (May 9, 2017)
 - Improvement: Support ICU Message syntax
 
