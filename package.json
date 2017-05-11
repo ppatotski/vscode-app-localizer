@@ -2,7 +2,7 @@
     "name": "vscode-app-localizer",
     "displayName": "vscode-app-localizer",
     "description": "Visual Studio Code Application Localizer",
-    "version": "0.3.4",
+    "version": "0.3.5",
     "publisher": "gsppvo",
     "license": "SEE LICENSE IN LICENSE.md",
     "homepage": "https://github.com/ppatotski/vscode-app-localizer",
@@ -106,7 +106,8 @@
     ],
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
+        "test": "node ./node_modules/vscode/bin/test",
+		"deploy": "vsce publish"
     },
     "devDependencies": {
         "vscode": "^1.0.0",
@@ -116,6 +117,6 @@
         "@types/mocha": "^2.2.32"
     },
     "dependencies": {
-        "app-localizer": "^1.1.12"
+        "app-localizer": "^1.1.13"
     }
 }

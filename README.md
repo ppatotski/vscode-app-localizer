@@ -1,6 +1,6 @@
-# Visual Studio Code Application Localizer
+# Application Localizer Visual Studio Code Extension
 
-Visual Studio Code Application Localizer.
+Application Localizer Visual Studio Code Extension that helps with localizing applications.
 
 > Utilizes [app-localizer](https://github.com/ppatotski/app-localizer)
 >
@@ -48,7 +48,8 @@ Visual Studio Code Application Localizer.
 		"brackets": true,
 		"accents": true,
 		"rightToLeft": false,
-		"wordexpander": 0.5
+		"wordexpander": 0.5,
+		"forceException": false
 	}
 }
 ```
@@ -110,6 +111,10 @@ Visual Studio Code Application Localizer.
 			"rightToLeft": {
 				"type": "boolean",
 				"description": "Left-to-Right"
+			},
+			"forceException": {
+				"type": "boolean",
+				"description": "Do not transform in case of syntax exception"
 			}
 		}
 	}

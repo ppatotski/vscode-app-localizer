@@ -1,14 +1,9 @@
 {
 	"commands": [
 		{
-            "id": "fixall",
-            "text": "❊",
-            "tooltip": "ESLint: Fix All",
-            "color": "lightblue",
-            "commandType": "palette",
-            "command": "eslint.executeAutofix",
-            "alignment": "right",
-            "priority": 0
+            "text": "Deploy Localizer",
+            "color": "lightgreen",
+            "command": "npm run deploy"
         }
 	]
 }
