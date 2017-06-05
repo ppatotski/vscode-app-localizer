@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.3.6 (June 5, 2017)
+- Improvement: Update documentaion and dependency
+
 ## 0.3.5 (May 11, 2017)
 - Issue: generate unnecessary `null` in `{pctBlack, number, null}` for pseudo text.
 

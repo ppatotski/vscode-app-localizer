@@ -32,9 +32,23 @@ Application Localizer Visual Studio Code Extension that helps with localizing ap
 
 [![Demo](demo.gif)](demo.gif)
 
-## Configuration
+## Settings Reference
 
-### Config file example (`./.vscode/applocalizer.json`)
+Locale validator options
+* **filePathPattern** Locale files path (supports node glob pattern).
+* **multiFile** Each locale is in separate file in the same folder.
+* **fileStructure** Structure of locale file content (`polymer` or `angular.flat` file structure).
+
+Pseudo locale generator options
+* **expander** Sentence expand factor 0.3 = 30%.
+* **wordexpander** Word expand factor 0.5 = 50%.
+* **brackets** Enclose sentence in brackets.
+* **exclamations** Enclose sentence in exclamations.
+* **accents** Convert letter to its accent version.
+* **rightToLeft** RTL writing systems.
+* **forceException** Force throwing syntax exception if any.
+
+## Config file example (`./.vscode/applocalizer.json`)
 ```json
 {
 	"validator": {
@@ -54,75 +68,7 @@ Application Localizer Visual Studio Code Extension that helps with localizing ap
 }
 ```
 
-### Configuration file schema (documentation)
-```json
-{
-	"validator": {
-		"type": "object",
-		"description": "Validate locales (checking for missing labels)",
-		"properties": {
-			"multiFile": {
-				"type": "boolean",
-				"description": "Each locale is in separate file in the same folder.",
-				"default": "false"
-			},
-			"filePathPattern": {
-				"type": "string",
-				"description": "Pattern of locale files path",
-				"default": "**/locales.json"
-			},
-			"fileStructure": {
-				"type": "string",
-				"description": "Structure of locale file content",
-				"default": "polymer",
-				"enum": [
-					"polymer",
-					"angular.flat"
-				]
-			}
-		}
-	},
-	"pseudoLocale": {
-		"type": "object",
-		"description": "Pseudo localizer settings",
-		"properties": {
-			"expander": {
-				"type": "number",
-				"description": "Expand factor 0.3 = 30%",
-				"default": 0.3
-			},
-			"wordexpander": {
-				"type": "number",
-				"description": "Expand factor 0.5 = 50%",
-				"default": 1
-			},
-			"brackets": {
-				"type": "boolean",
-				"description": "Enclose in brackets"
-			},
-			"exclamations": {
-				"type": "boolean",
-				"description": "Enclose in exclamations"
-			},
-			"accents": {
-				"type": "boolean",
-				"description": "Convert letter to its accent version"
-			},
-			"rightToLeft": {
-				"type": "boolean",
-				"description": "Left-to-Right"
-			},
-			"forceException": {
-				"type": "boolean",
-				"description": "Do not transform in case of syntax exception"
-			}
-		}
-	}
-}
-```
-## Single-File locale example
-
-### file with locales `/locales/locale.json`
+## Single-File locale example `/locales/locale.json`
 ```json
 {
 	"en-us": {
