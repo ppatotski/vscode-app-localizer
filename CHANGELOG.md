@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.3.7 (July 14, 2017)
+- Improvement: Update extension metadata and dependency
+
 ## 0.3.6 (June 5, 2017)
 - Improvement: Update documentation and dependency
 
