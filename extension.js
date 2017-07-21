@@ -2,6 +2,7 @@ const vscode = require('vscode');
 const localizer = require( 'app-localizer' );
 const fs = require('fs');
 const path = require('path');
+const strip = require('strip-json-comments');
 
 const workspaceOnlyMessage = 'Applocalizer can only be enabled if VS Code is opened on a workspace folder';
 const exampleJson = `{
@@ -59,8 +60,9 @@ function activate(context) {
 			} else {
 				vscode.window.activeTextEditor.edit(edit => {
 					if(!vscode.window.activeTextEditor.selection.isEmpty && settings && settings.pseudoLocale) {
-						const text = vscode.window.activeTextEditor.document.getText(vscode.window.activeTextEditor.selection);
-						edit.replace(vscode.window.activeTextEditor.selection, localizer.toPseudoText(text, settings.pseudoLocale));
+						const text = unescape(vscode.window.activeTextEditor.document.getText(vscode.window.activeTextEditor.selection));
+						const result = localizer.toPseudoText(text, settings.pseudoLocale);
+						edit.replace(vscode.window.activeTextEditor.selection, result);
 					}
 				});
 			}
@@ -110,7 +112,7 @@ function activate(context) {
 							if(err) {
 								console.error(err);
 							} else {
-								settings = JSON.parse(buffer);
+								settings = JSON.parse(strip(buffer.toString()));
 								collection.clear();
 								if(vscode.window.activeTextEditor) {
 									validate(vscode.window.activeTextEditor.document);

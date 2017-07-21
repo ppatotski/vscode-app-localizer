@@ -23,6 +23,7 @@ Application Localizer Visual Studio Code Extension that helps with localizing ap
 	- Support [ICU Message syntax](https://formatjs.io/guides/message-syntax/)
 * Create default settings file (`Ctrl+Shift+P` or `Cmd+Shift+P` type `Applocalizer: Settings`)
 	- Apply settings immediately after saving changes in `./.vscode/applocalizer.json` file
+	- Support comments in JSON as an extension to JSON specification
 
 ## Get Started
 

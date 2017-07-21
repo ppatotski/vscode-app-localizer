@@ -2,7 +2,7 @@
     "name": "vscode-app-localizer",
     "displayName": "vscode-app-localizer",
     "description": "Application Localizer Visual Studio Code Extension",
-    "version": "0.3.7",
+    "version": "0.3.8",
     "publisher": "gsppvo",
     "license": "SEE LICENSE IN LICENSE.md",
     "homepage": "https://github.com/ppatotski/vscode-app-localizer",
@@ -117,6 +117,7 @@
         "@types/mocha": "^2.2.32"
     },
     "dependencies": {
+		"strip-json-comments": "^2.0.1",
         "app-localizer": "^1.1.19"
     }
 }

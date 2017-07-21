@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.3.8 (July 21, 2017)
+- Improvement: Support comments in json configuration file
+
 ## 0.3.7 (July 14, 2017)
 - Improvement: Update extension metadata and dependency
 
