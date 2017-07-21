@@ -60,8 +60,9 @@ function activate(context) {
 			} else {
 				vscode.window.activeTextEditor.edit(edit => {
 					if(!vscode.window.activeTextEditor.selection.isEmpty && settings && settings.pseudoLocale) {
-						const text = unescape(vscode.window.activeTextEditor.document.getText(vscode.window.activeTextEditor.selection));
-						const result = localizer.toPseudoText(text, settings.pseudoLocale);
+						const text = vscode.window.activeTextEditor.document.getText(vscode.window.activeTextEditor.selection);
+						// Need to think about better way to deal with escapes in text
+						const result = localizer.toPseudoText(JSON.parse(`{ "text": "${text}" }`).text, settings.pseudoLocale);
 						edit.replace(vscode.window.activeTextEditor.selection, result);
 					}
 				});
