@@ -2,6 +2,7 @@ const vscode = require('vscode');
 const localizer = require( 'app-localizer' );
 const fs = require('fs');
 const path = require('path');
+const strip = require('strip-json-comments');
 
 const workspaceOnlyMessage = 'Applocalizer can only be enabled if VS Code is opened on a workspace folder';
 const exampleJson = `{
@@ -60,7 +61,9 @@ function activate(context) {
 				vscode.window.activeTextEditor.edit(edit => {
 					if(!vscode.window.activeTextEditor.selection.isEmpty && settings && settings.pseudoLocale) {
 						const text = vscode.window.activeTextEditor.document.getText(vscode.window.activeTextEditor.selection);
-						edit.replace(vscode.window.activeTextEditor.selection, localizer.toPseudoText(text, settings.pseudoLocale));
+						// Need to think about better way to deal with escapes in text
+						const result = localizer.toPseudoText(JSON.parse(`{ "text": "${text}" }`).text, settings.pseudoLocale);
+						edit.replace(vscode.window.activeTextEditor.selection, result);
 					}
 				});
 			}
@@ -110,7 +113,7 @@ function activate(context) {
 							if(err) {
 								console.error(err);
 							} else {
-								settings = JSON.parse(buffer);
+								settings = JSON.parse(strip(buffer.toString()));
 								collection.clear();
 								if(vscode.window.activeTextEditor) {
 									validate(vscode.window.activeTextEditor.document);
