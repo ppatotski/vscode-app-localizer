@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.3.9 (Aug 3, 2017)
+- Improvement: Added json mode option that affects escaped characters handling
+- Improvement: Updated dependency
+
 ## 0.3.8 (July 21, 2017)
 - Improvement: Support comments in json configuration file
 - Improvement: Support escaped characters
