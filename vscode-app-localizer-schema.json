@@ -61,6 +61,10 @@
 				"forceException": {
 					"type": "boolean",
 					"description": "Force throwing syntax exception if any"
+				},
+				"escapeCharacters": {
+					"type": "boolean",
+					"description": "Escape special characters ('false' for json content)"
 				}
 			}
 		}

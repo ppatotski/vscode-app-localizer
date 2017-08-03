@@ -2,6 +2,8 @@
 
 Application Localizer Visual Studio Code Extension that helps with localizing applications.
 
+[Pseudo Locale Generator Web Site](https://ppatotski.github.io/app-localizer/)
+
 > Utilizes [app-localizer](https://github.com/ppatotski/app-localizer)
 >
 > [![NPM Package](https://img.shields.io/npm/v/app-localizer.svg)](https://www.npmjs.com/package/app-localizer)
@@ -48,6 +50,7 @@ Pseudo locale generator options
 * **accents** Convert letter to its accent version.
 * **rightToLeft** RTL writing systems.
 * **forceException** Force throwing syntax exception if any.
+* **escapeCharacters** Escape special characters (`false` for json content)
 
 ## Config file example (`./.vscode/applocalizer.json`)
 ```json
@@ -64,7 +67,8 @@ Pseudo locale generator options
 		"accents": true,
 		"rightToLeft": false,
 		"wordexpander": 0.5,
-		"forceException": false
+		"forceException": false,
+		"escapeCharacters": false
 	}
 }
 ```
