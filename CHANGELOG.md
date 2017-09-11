@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.3.10 (September 11, 2017)
+- Improvement: Added global settings support
+
 ## 0.3.9 (Aug 3, 2017)
 - Improvement: Added json mode option that affects escaped characters handling
 - Improvement: Updated dependency

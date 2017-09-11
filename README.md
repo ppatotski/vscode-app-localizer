@@ -23,7 +23,7 @@ Application Localizer Visual Studio Code Extension that helps with localizing ap
     - Enclose in exclamations
     - Enclose in brackets
 	- Support [ICU Message syntax](https://formatjs.io/guides/message-syntax/)
-* Create default settings file (`Ctrl+Shift+P` or `Cmd+Shift+P` type `Applocalizer: Settings`)
+* Create workspace and global settings file (`Ctrl+Shift+P` or `Cmd+Shift+P` type `Applocalizer: Settings`)
 	- Apply settings immediately after saving changes in `./.vscode/applocalizer.json` file
 	- Support comments in JSON as an extension to JSON specification
 
@@ -52,7 +52,7 @@ Pseudo locale generator options
 * **forceException** Force throwing syntax exception if any.
 * **escapeCharacters** Escape special characters (`false` for json content)
 
-## Config file example (`./.vscode/applocalizer.json`)
+## Config file example (`./.vscode/applocalizer.json` or `~/applocalizer.json`)
 ```json
 {
 	"validator": {
