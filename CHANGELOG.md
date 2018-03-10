@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.3.11 (March 9, 2018)
+- Issue: angular.flat locale handling issue fix
+
 ## 0.3.10 (September 11, 2017)
 - Improvement: Added global settings support
 
